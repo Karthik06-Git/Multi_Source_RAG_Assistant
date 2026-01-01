@@ -4,6 +4,8 @@ A Retrieval-Augmented Generation (RAG) based conversational assistant that enabl
 
 The system ingests user-provided URLs, builds a semantic vector index, and answers queries using large language models with conversational memory support.
 
+App Demo :- https://llm-powered-multi-source-rag-assistant.streamlit.app/
+
 ---
 
 ## Project Overview
