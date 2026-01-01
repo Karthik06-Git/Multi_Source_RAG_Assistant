@@ -94,19 +94,19 @@ Multi_Source_RAG_Assistant/
 
 ```mermaid
 flowchart TD
-    A[User Interface<br/>(Streamlit App)]
-    B[URL Processing Module<br/>(FastAPI Backend)]
-    C[Document Loader<br/>(UnstructuredURLLoader)]
-    D[Text Chunking<br/>(RecursiveCharacterTextSplitter)]
-    E[Embedding Model<br/>(Hugging Face)]
-    F[Vector Store<br/>(FAISS Index)]
-    G[Query API<br/>(FastAPI Endpoint)]
-    H[Session Memory<br/>(SQLite Database)]
-    I[History-Aware Retriever<br/>(LangChain)]
-    J[Context Retrieval<br/>(FAISS Similarity Search)]
-    K[Large Language Model<br/>(Groq LLM)]
-    L[Session Update<br/>(SQLite Memory Store)]
-    M[Answer Displayed<br/>(Streamlit Chat UI)]
+    A[User Interface (Streamlit App)]
+    B[URL Processing Module (FastAPI Backend)]
+    C[Document Loader (UnstructuredURLLoader)]
+    D[Text Chunking (RecursiveCharacterTextSplitter)]
+    E[Embedding Model (Hugging Face)]
+    F[Vector Store (FAISS Index)]
+    G[Query API (FastAPI Endpoint)]
+    H[Session Memory (SQLite Database)]
+    I[History-Aware Retriever (LangChain)]
+    J[Context Retrieval (FAISS Similarity Search)]
+    K[Large Language Model (Groq LLM)]
+    L[Session Update (SQLite Memory Store)]
+    M[Answer Displayed (Streamlit Chat UI)]
 
     A -->|Provide URLs| B
     B -->|Load content| C
