@@ -92,6 +92,99 @@ Multi_Source_RAG_Assistant/
 
 ## How It Works
 
+
+┌──────────────────────────┐
+│ User Interface │
+│ (Streamlit App) │
+└─────────────┬────────────┘
+│
+│ 1. User provides documentation URLs
+▼
+┌──────────────────────────┐
+│ URL Processing Module │
+│ (FastAPI Backend) │
+└─────────────┬────────────┘
+│
+│ 2. Load and parse web content
+▼
+┌──────────────────────────┐
+│ Document Loader │
+│ (UnstructuredURLLoader) │
+└─────────────┬────────────┘
+│
+│ 3. Split content into chunks
+▼
+┌──────────────────────────┐
+│ Text Chunking │
+│ (RecursiveCharacter │
+│ Text Splitter) │
+└─────────────┬────────────┘
+│
+│ 4. Generate embeddings
+▼
+┌──────────────────────────┐
+│ Embedding Model │
+│ (Hugging Face) │
+└─────────────┬────────────┘
+│
+│ 5. Store vectors for retrieval
+▼
+┌──────────────────────────┐
+│ Vector Store │
+│ (FAISS Index) │
+└─────────────┬────────────┘
+│
+│ 6. User submits a query
+▼
+┌──────────────────────────┐
+│ Query API │
+│ (FastAPI Endpoint) │
+└─────────────┬────────────┘
+│
+│ 7. Retrieve chat history
+▼
+┌──────────────────────────┐
+│ Session Memory │
+│ (SQLite Database) │
+└─────────────┬────────────┘
+│
+│ 8. Reformulate query using history
+▼
+┌──────────────────────────┐
+│ History-Aware Retriever │
+│ (LangChain) │
+└─────────────┬────────────┘
+│
+│ 9. Retrieve relevant document chunks
+▼
+┌──────────────────────────┐
+│ Context Retrieval │
+│ (FAISS Similarity Search)│
+└─────────────┬────────────┘
+│
+│ 10. Generate grounded answer
+▼
+┌──────────────────────────┐
+│ Large Language Model │
+│ (Groq LLM) │
+└─────────────┬────────────┘
+│
+│ 11. Store conversation
+▼
+┌──────────────────────────┐
+│ Session Update │
+│ (SQLite Memory Store) │
+└─────────────┬────────────┘
+│
+│ 12. Return response
+▼
+┌──────────────────────────┐
+│ Streamlit Chat UI │
+│ (Answer Displayed) │
+└──────────────────────────┘
+
+
+
 ┌──────────────────────────┐
 │       User Interface     │
 │      (Streamlit App)     │
