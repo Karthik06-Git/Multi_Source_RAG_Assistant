@@ -50,6 +50,36 @@ The system is designed with a clean separation between frontend, backend, and da
 
 ---
 
+
+## Evaluation & Performance
+
+This RAG system was evaluated using the RAGAS (Retrieval-Augmented Generation Application System) framework to assess the quality of retrieval, answer relevance, and grounding of generated responses. The evaluation was conducted on curated queries derived from real-world technical documentations, including Pandas and NumPy sites.
+
+### Evaluation Metrics
+### Evaluation Metrics (RAGAS)
+
+| Metric             | Score |
+|--------------------|-------|
+| Faithfulness       | 0.96  |
+| Answer Relevancy   | 0.93  |
+| Context Precision  | 1.00  |
+| Context Recall     | 1.00  |
+
+
+### Interpretation
+
+- High faithfulness (0.96) indicates that the generated responses are strongly grounded in the retrieved documentation, with minimal hallucination.
+
+- High answer relevancy (0.93) demonstrates accurate understanding of user queries.
+
+- Perfect context precision and recall (1.00) confirm that the retriever consistently selects relevant and sufficient document chunks.
+
+- These results validate the effectiveness of the history-aware retrieval strategy and the overall reliability of the RAG pipeline for documentation-based question answering.
+
+
+---
+
+
 ## Tech Stack
 
 - Python 3.10
