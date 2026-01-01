@@ -95,7 +95,7 @@ def get_response(session_id: str, user_query: str):
 
 
 #### Main Interface
-st.title("LLM-Powered Multi-URL RAG Chatbot")
+st.title("LLM-Powered Multi-Source RAG Chatbot")
 
 
 # Chat History Display and Management
