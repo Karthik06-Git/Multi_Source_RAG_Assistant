@@ -26,19 +26,19 @@ The system is designed with a clean separation between frontend, backend, and da
 - Streamlit frontend for interactive chat experience
 - SQLite-based session history storage
 - FAISS vector store for efficient semantic search
-- Dockerized and deployable on Hugging Face Spaces
+- Dockerized and deployable on HuggingFace Spaces
 
 ---
 
 ## System Architecture
 
 ### Frontend
-- Streamlit web interface
+- Streamlit web interface (deployed in Streamlit cloud)
 - Maintains UI-level chat history using session state
 - Communicates with backend via REST APIs
 
 ### Backend
-- FastAPI application
+- FastAPI application (deployed in HuggingFace Spaces)
 - Handles URL processing, vector retrieval, and LLM Response
 - Implements history-aware RAG pipeline using LangChain
 
