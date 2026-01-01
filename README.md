@@ -90,190 +90,37 @@ Multi_Source_RAG_Assistant/
 
 ---
 
-## How It Works
+## How It Works (System Flow)
 
+```mermaid
+flowchart TD
+    A[User Interface<br/>(Streamlit App)]
+    B[URL Processing Module<br/>(FastAPI Backend)]
+    C[Document Loader<br/>(UnstructuredURLLoader)]
+    D[Text Chunking<br/>(RecursiveCharacterTextSplitter)]
+    E[Embedding Model<br/>(Hugging Face)]
+    F[Vector Store<br/>(FAISS Index)]
+    G[Query API<br/>(FastAPI Endpoint)]
+    H[Session Memory<br/>(SQLite Database)]
+    I[History-Aware Retriever<br/>(LangChain)]
+    J[Context Retrieval<br/>(FAISS Similarity Search)]
+    K[Large Language Model<br/>(Groq LLM)]
+    L[Session Update<br/>(SQLite Memory Store)]
+    M[Answer Displayed<br/>(Streamlit Chat UI)]
 
-┌──────────────────────────┐
-│ User Interface │
-│ (Streamlit App) │
-└─────────────┬────────────┘
-│
-│ 1. User provides documentation URLs
-▼
-┌──────────────────────────┐
-│ URL Processing Module │
-│ (FastAPI Backend) │
-└─────────────┬────────────┘
-│
-│ 2. Load and parse web content
-▼
-┌──────────────────────────┐
-│ Document Loader │
-│ (UnstructuredURLLoader) │
-└─────────────┬────────────┘
-│
-│ 3. Split content into chunks
-▼
-┌──────────────────────────┐
-│ Text Chunking │
-│ (RecursiveCharacter │
-│ Text Splitter) │
-└─────────────┬────────────┘
-│
-│ 4. Generate embeddings
-▼
-┌──────────────────────────┐
-│ Embedding Model │
-│ (Hugging Face) │
-└─────────────┬────────────┘
-│
-│ 5. Store vectors for retrieval
-▼
-┌──────────────────────────┐
-│ Vector Store │
-│ (FAISS Index) │
-└─────────────┬────────────┘
-│
-│ 6. User submits a query
-▼
-┌──────────────────────────┐
-│ Query API │
-│ (FastAPI Endpoint) │
-└─────────────┬────────────┘
-│
-│ 7. Retrieve chat history
-▼
-┌──────────────────────────┐
-│ Session Memory │
-│ (SQLite Database) │
-└─────────────┬────────────┘
-│
-│ 8. Reformulate query using history
-▼
-┌──────────────────────────┐
-│ History-Aware Retriever │
-│ (LangChain) │
-└─────────────┬────────────┘
-│
-│ 9. Retrieve relevant document chunks
-▼
-┌──────────────────────────┐
-│ Context Retrieval │
-│ (FAISS Similarity Search)│
-└─────────────┬────────────┘
-│
-│ 10. Generate grounded answer
-▼
-┌──────────────────────────┐
-│ Large Language Model │
-│ (Groq LLM) │
-└─────────────┬────────────┘
-│
-│ 11. Store conversation
-▼
-┌──────────────────────────┐
-│ Session Update │
-│ (SQLite Memory Store) │
-└─────────────┬────────────┘
-│
-│ 12. Return response
-▼
-┌──────────────────────────┐
-│ Streamlit Chat UI │
-│ (Answer Displayed) │
-└──────────────────────────┘
+    A -->|Provide URLs| B
+    B -->|Load content| C
+    C -->|Parse text| D
+    D -->|Generate embeddings| E
+    E -->|Store vectors| F
+    F -->|Ready for queries| G
+    G -->|Fetch history| H
+    H -->|Contextualize query| I
+    I -->|Retrieve chunks| J
+    J -->|Provide context| K
+    K -->|Generate answer| L
+    L -->|Return response| M
 
-
-
-┌──────────────────────────┐
-│       User Interface     │
-│      (Streamlit App)     │
-└─────────────┬────────────┘
-              │
-              │ 1. User provides documentation URLs
-              ▼
-┌──────────────────────────┐
-│  URL Processing Module   │
-│   (FastAPI Backend)      │
-└─────────────┬────────────┘
-              │
-              │ 2. Load and parse web content
-              ▼
-┌──────────────────────────┐
-│     Document Loader      │
-│ (UnstructuredURLLoader)  │
-└─────────────┬────────────┘
-              │
-              │ 3. Split content into chunks
-              ▼
-┌──────────────────────────┐
-│     Text Chunking        │
-│   (RecursiveCharacter    │
-│     Text Splitter)       │
-└─────────────┬────────────┘
-              │
-              │ 4. Generate embeddings
-              ▼
-┌──────────────────────────┐
-│     Embedding Model      │
-│     (Hugging Face)       │
-└─────────────┬────────────┘
-              │
-              │ 5. Store vectors for retrieval
-              ▼
-┌──────────────────────────┐
-│       Vector Store       │
-│       (FAISS Index)      │
-└─────────────┬────────────┘
-              │
-              │ 6. User submits a query
-              ▼
-┌──────────────────────────┐
-│       Query API          │
-│   (FastAPI Endpoint)     │
-└─────────────┬────────────┘
-              │
-              │ 7. Retrieve chat history
-              ▼
-┌──────────────────────────┐
-│     Session Memory       │
-│    (SQLite Database)     │
-└─────────────┬────────────┘
-              │
-              │ 8. Reformulate query using history
-              ▼
-┌──────────────────────────┐
-│ History-Aware Retriever  │
-│       (LangChain)        │
-└─────────────┬────────────┘
-              │
-              │ 9. Retrieve relevant document chunks
-              ▼
-┌──────────────────────────┐
-│     Context Retrieval    │
-│ (FAISS Similarity Search)│
-└─────────────┬────────────┘
-              │
-              │ 10. Generate grounded answer
-              ▼
-┌──────────────────────────┐
-│   Large Language Model   │
-│       (Groq LLM)         │
-└─────────────┬────────────┘
-              │
-              │ 11. Store conversation
-              ▼
-┌──────────────────────────┐
-│     Session Update       │
-│   (SQLite Memory Store)  │
-└─────────────┬────────────┘
-              │
-              │ 12. Return response
-              ▼
-┌──────────────────────────┐
-│     Streamlit Chat UI    │
-│    (Answer Displayed)    │
-└──────────────────────────┘
 
 
 ---
