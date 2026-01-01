@@ -92,34 +92,19 @@ Multi_Source_RAG_Assistant/
 
 ## How It Works (System Flow)
 
-```mermaid
-flowchart TD
-    A[User Interface (Streamlit App)]
-    B[URL Processing Module (FastAPI Backend)]
-    C[Document Loader (UnstructuredURLLoader)]
-    D[Text Chunking (RecursiveCharacterTextSplitter)]
-    E[Embedding Model (Hugging Face)]
-    F[Vector Store (FAISS Index)]
-    G[Query API (FastAPI Endpoint)]
-    H[Session Memory (SQLite Database)]
-    I[History-Aware Retriever (LangChain)]
-    J[Context Retrieval (FAISS Similarity Search)]
-    K[Large Language Model (Groq LLM)]
-    L[Session Update (SQLite Memory Store)]
-    M[Answer Displayed (Streamlit Chat UI)]
+1. User provides documentation URLs via the Streamlit interface.
+2. FastAPI backend loads and parses content from the URLs.
+3. Documents are split into chunks.
+4. Embeddings are generated using a Hugging Face model.
+5. Vectors are stored in a FAISS index.
+6. User submits a query.
+7. Chat history is retrieved from SQLite.
+8. Query is reformulated using conversation history.
+9. Relevant document chunks are retrieved.
+10. LLM generates a grounded response.
+11. Chat history is updated.
+12. Answer is displayed in the UI.
 
-    A -->|Provide URLs| B
-    B -->|Load content| C
-    C -->|Parse text| D
-    D -->|Generate embeddings| E
-    E -->|Store vectors| F
-    F -->|Ready for queries| G
-    G -->|Fetch history| H
-    H -->|Contextualize query| I
-    I -->|Retrieve chunks| J
-    J -->|Provide context| K
-    K -->|Generate answer| L
-    L -->|Return response| M
 
 
 
