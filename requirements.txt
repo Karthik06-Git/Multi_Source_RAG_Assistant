@@ -16,3 +16,6 @@ requests
 python-dotenv 
 
 streamlit
+
+datasets
+ragas
